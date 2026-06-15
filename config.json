@@ -1,0 +1,8 @@
+{
+  "port": 9090,
+  "corsOrigins": [
+    "https://app.photonow.com.br",
+    "https://cabine-teste.web.app",
+    "http://localhost:8080"
+  ]
+}
