@@ -41,13 +41,21 @@ echo.
 echo Iniciando servidor de audio agora...
 start "" /MIN "%INSTALL_DIR%\start-audio-server.bat"
 
+echo Aguardando servidor subir...
+timeout /t 3 /nobreak >nul
+
 echo.
 echo Instalacao concluida.
-echo URL local: http://127.0.0.1:9090/manifest.json
+echo.
+echo Teste no navegador:
+echo   http://127.0.0.1:9090/
+echo   http://127.0.0.1:9090/manifest.json
 echo.
 echo Coloque os arquivos em:
 echo   %INSTALL_DIR%\saudacoes\
 echo   %INSTALL_DIR%\despedidas\
 echo   %INSTALL_DIR%\musica\
+echo.
+echo Se a pasta musica estiver vazia, o totem usa a musica embutida no app.
 echo.
 pause

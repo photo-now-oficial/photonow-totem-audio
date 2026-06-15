@@ -104,8 +104,28 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  if (url.pathname === "/manifest.json") {
-    sendJson(res, 200, buildManifest(), origin, allowedOrigins);
+  if (url.pathname === "/" || url.pathname === "/manifest.json") {
+    const manifest = buildManifest();
+    const payload =
+      url.pathname === "/manifest.json"
+        ? manifest
+        : {
+            ok: true,
+            message: "PhotoNow audio server ativo",
+            pasta: ROOT,
+            urls: {
+              manifest: `http://127.0.0.1:${PORT}/manifest.json`,
+              health: `http://127.0.0.1:${PORT}/health`,
+            },
+            manifest,
+            aviso:
+              manifest.saudacoes.length === 0 ||
+              manifest.despedidas.length === 0 ||
+              !manifest.musica
+                ? "Faltam arquivos em saudacoes/, despedidas/ ou musica/"
+                : null,
+          };
+    sendJson(res, 200, payload, origin, allowedOrigins);
     return;
   }
 
